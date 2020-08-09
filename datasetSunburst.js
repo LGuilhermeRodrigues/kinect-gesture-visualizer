@@ -29,14 +29,14 @@ let autoBox = () => {
 
 d3.json("flare-2.json", data => {
 
-    console.log(data)
+    //console.log(data)
 
     let color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1))
 
     let svg = d3.select('.datasetStructure').append("svg").style("border","0px solid black").attr("width",500).attr("height",500).attr("viewBox", "-250 -250 500 500")
 
     const root = partition(data);
-    console.log(root)
+    //console.log(root)
     svg.append("g")
         .attr("fill-opacity", 0.6)
         .selectAll("path")
