@@ -6,78 +6,23 @@
    "children": [
     {
      "name": "Right Punch ",
-     "children": [
-      {"name": "22", "value": 1},
-      {"name": "43", "value": 1},
-      {"name": "64", "value": 1},
-      {"name": "85", "value": 1},
-      {"name": "106", "value": 1},
-      {"name": "127", "value": 1},
-      {"name": "148", "value": 1},
-      {"name": "169", "value": 1},
-      {"name": "190", "value": 1},
-      {"name": "214", "value": 1}
-     ]
+     "value": 1
     },
     {
      "name": "Left Punch",
-     "children": [
-      {"name": "23", "value": 1},
-      {"name": "44", "value": 1},
-      {"name": "65", "value": 1},
-      {"name": "86", "value": 1},
-      {"name": "107", "value": 1},
-      {"name": "128", "value": 1},
-      {"name": "149", "value": 1},
-      {"name": "170", "value": 1},
-      {"name": "191", "value": 1},
-      {"name": "215", "value": 1}
-     ]
+     "value": 1
     },
     {
      "name": "Right Kick",
-     "children": [
-      {"name": "24", "value": 1},
-      {"name": "45", "value": 1},
-      {"name": "66", "value": 1},
-      {"name": "87", "value": 1},
-      {"name": "108", "value": 1},
-      {"name": "129", "value": 1},
-      {"name": "150", "value": 1},
-      {"name": "171", "value": 1},
-      {"name": "192", "value": 1},
-      {"name": "216", "value": 1}
-     ]
+     "value": 1
     },
     {
      "name":  "Left Kick",
-     "children": [
-      {"name": "25", "value": 1},
-      {"name": "46", "value": 1},
-      {"name": "67", "value": 1},
-      {"name": "88", "value": 1},
-      {"name": "109", "value": 1},
-      {"name": "130", "value": 1},
-      {"name": "151", "value": 1},
-      {"name": "172", "value": 1},
-      {"name": "193", "value": 1},
-      {"name": "217", "value": 1}
-     ]
+     "value": 1
     },
     {
      "name":  "Defend",
-     "children": [
-      {"name": "26", "value": 1},
-      {"name": "47", "value": 1},
-      {"name": "68", "value": 1},
-      {"name": "89", "value": 1},
-      {"name": "110", "value": 1},
-      {"name": "131", "value": 1},
-      {"name": "152", "value": 1},
-      {"name": "173", "value": 1},
-      {"name": "194", "value": 1},
-      {"name": "218", "value": 1}
-     ]
+     "value": 1
     }
    ]
   },
@@ -86,18 +31,7 @@
    "children": [
     {
      "name": "Golf swing",
-     "children": [
-      {"name": "25", "value": 1},
-      {"name": "46", "value": 1},
-      {"name": "67", "value": 1},
-      {"name": "88", "value": 1},
-      {"name": "109", "value": 1},
-      {"name": "130", "value": 1},
-      {"name": "151", "value": 1},
-      {"name": "172", "value": 1},
-      {"name": "193", "value": 1},
-      {"name": "217", "value": 1}
-     ]
+     "value": 1
     }
    ]
   },
@@ -106,48 +40,79 @@
    "children": [
     {
      "name": "Swing forehand",
-     "children": [
-      {"name": "25", "value": 1},
-      {"name": "46", "value": 1},
-      {"name": "67", "value": 1},
-      {"name": "88", "value": 1},
-      {"name": "109", "value": 1},
-      {"name": "130", "value": 1},
-      {"name": "151", "value": 1},
-      {"name": "172", "value": 1},
-      {"name": "193", "value": 1},
-      {"name": "217", "value": 1}
-     ]
+     "value": 1
     },
     {
      "name": "Swing backhand",
-     "children": [
-      {"name": "25", "value": 1},
-      {"name": "46", "value": 1},
-      {"name": "67", "value": 1},
-      {"name": "88", "value": 1},
-      {"name": "109", "value": 1},
-      {"name": "130", "value": 1},
-      {"name": "151", "value": 1},
-      {"name": "172", "value": 1},
-      {"name": "193", "value": 1},
-      {"name": "217", "value": 1}
-     ]
+     "value": 1
     },
     {
      "name": "Tennis serve",
-     "children": [
-      {"name": "25", "value": 1},
-      {"name": "46", "value": 1},
-      {"name": "67", "value": 1},
-      {"name": "88", "value": 1},
-      {"name": "109", "value": 1},
-      {"name": "130", "value": 1},
-      {"name": "151", "value": 1},
-      {"name": "172", "value": 1},
-      {"name": "193", "value": 1},
-      {"name": "217", "value": 1}
-     ]
+     "value": 1
+    }
+   ]
+  },
+  {
+   "name": "Bowling",
+   "children": [
+    {
+     "name": "Throw bowling ball",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "name": "First Person Shooter",
+   "children": [
+    {
+     "name": "Aim & shoot",
+     "value": 1
+    },
+    {
+     "name": "Walk",
+     "value": 1
+    },
+    {
+     "name": "Run",
+     "value": 1
+    },
+    {
+     "name": "Jump",
+     "value": 1
+    },
+    {
+     "name": "Climb",
+     "value": 1
+    },
+    {
+     "name": "Crouch",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "name": "Driving a car",
+   "children": [
+    {
+     "name": "Steering wheel",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "name": "Miscellaneous",
+   "children": [
+    {
+     "name": "Wave",
+     "value": 1
+    },
+    {
+     "name": "Flap arms",
+     "value": 1
+    },
+    {
+     "name": "Clap",
+     "value": 1
     }
    ]
   }
