@@ -117,31 +117,25 @@ function posPointY(d){
 }
 
 function init(mydata){
-    // x -10 até 10
-    // y 1 até -10
-    // z -10 até 10
     var cnt = 0;
     xGrid = [], scatter = [], yLine = [];
-    // mydata = [{x: -3, y: -5, z: -0.5},{x: 0, y: -6, z: -4},{x: -10, y: -10, z: -10},
-    //     {x: 10, y: 0, z: 0},
-    //     {x: -1, y: -5, z: -1},
-    //     {x: -1, y: -5, z: -10}
-    //     ]
     for(var z = -j; z < j; z++){
         for(var x = -j; x < j; x++){
             xGrid.push([x, 1, z]);
             //scatter.push({x: x, y: d3.randomUniform(0, -10)(), z: z, id: 'point_' + cnt++});
         }
     }
+    // x -10 até 10
+    // y 1 até -10
+    // z -10 até 10
+    xScalle = d3.scaleLinear().domain([-0.5,0.5]).range([-10, 10]);
+    yScalle = d3.scaleLinear().domain([-1,1]).range([1, -10]);
+    zScalle = d3.scaleLinear().domain([2,3]).range([-10, 10]);
     mydata.forEach((joint, index)=>{
         scatter.push(
-            {x: joint.x, y: joint.y, z: joint.z, id: 'point_' + cnt++}
+            {x: xScalle(joint.x), y: yScalle(joint.y), z: zScalle(joint.z), id: 'point_' + cnt++}
         );
     });
-    // xGrid.push([-5, 1, -5]);
-    // scatter.push({x: -5, y: d3.randomUniform(0, -10)(), z: -5, id: 'point_' + cnt++});
-    // xGrid.push([-5, 1, -5]);
-    // scatter.push({x: -5, y: d3.randomUniform(0, -10)(), z: -5, id: 'point_' + cnt++});
 
     d3.range(-1, 11, 1).forEach(function(d){ yLine.push([-j, -d, -j]); });
 
