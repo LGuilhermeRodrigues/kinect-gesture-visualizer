@@ -122,11 +122,11 @@ function init(mydata){
     // z -10 até 10
     var cnt = 0;
     xGrid = [], scatter = [], yLine = [];
-    mydata = [{x: -3, y: -5, z: -0.5},{x: 0, y: -6, z: -4},{x: -10, y: -10, z: -10},
-        {x: 10, y: 0, z: 0},
-        {x: -1, y: -5, z: -1},
-        {x: -1, y: -5, z: -10}
-        ]
+    // mydata = [{x: -3, y: -5, z: -0.5},{x: 0, y: -6, z: -4},{x: -10, y: -10, z: -10},
+    //     {x: 10, y: 0, z: 0},
+    //     {x: -1, y: -5, z: -1},
+    //     {x: -1, y: -5, z: -10}
+    //     ]
     for(var z = -j; z < j; z++){
         for(var x = -j; x < j; x++){
             xGrid.push([x, 1, z]);
@@ -178,4 +178,4 @@ function dragEnd(){
 
 d3.selectAll('button').on('click', init);
 
-init();
+d3.json("skeleton.json", init)
