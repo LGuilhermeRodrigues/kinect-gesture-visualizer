@@ -144,7 +144,7 @@ function init(mydata){
         point3d(scatter),
         yScale3d([yLine])
     ];
-    processData(data, 1000);
+    processData(data, 30);
 }
 
 function dragStart(){
@@ -172,4 +172,28 @@ function dragEnd(){
 
 d3.selectAll('button').on('click', init);
 
-d3.json("skeleton.json", init)
+d3.json("skeletons.json", skeletons=>{
+    let frames = skeletons.length
+    let count = 0;
+
+    let update = () => {
+        init(skeletons[count])
+        count++
+        console.log('plotando dados '+count)
+        if (count<frames){
+            setTimeout(()=>{
+                update()
+            },34)
+        }
+    }
+
+    update()
+    // skeletons.forEach((skeleton, index)=>{
+    //     if(cnt===30){
+    //         // init(skeleton)
+    //         setTimeout(()=>{
+    //             console.log('plotando dados '+index)
+    //         },5000)
+    //     }
+    // })
+})

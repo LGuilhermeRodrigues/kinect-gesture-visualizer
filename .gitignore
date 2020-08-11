@@ -130,3 +130,6 @@ dmypy.json
 
 #Webstorm
 .idea
+
+#My Project
+dataset/*
