@@ -106,6 +106,9 @@ function processData(data, tt){
     yText.exit().remove();
 
     d3.selectAll('._3d').sort(d3._3d().sort);
+
+
+
 }
 
 function posPointX(d){
@@ -175,10 +178,11 @@ d3.selectAll('button').on('click', init);
 d3.json("skeletons.json", skeletons=>{
     let frames = skeletons.length
     let count = 0;
-
+    d3.selectAll('.frameTotal').text(frames)
     let update = () => {
         init(skeletons[count])
         count++
+        d3.selectAll('.frameId').text(count)
         console.log('plotando dados '+count)
         if (count<frames){
             setTimeout(()=>{

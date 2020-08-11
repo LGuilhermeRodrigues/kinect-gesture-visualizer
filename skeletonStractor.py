@@ -7,7 +7,8 @@ def extract_skeleton(path):
     my_skeleton = []
     root = tree.getroot()
     for i,child in enumerate(root):
-        if i == 1:
+        # there are many skeletons tracked, each folder has only one skeleton Tracked
+        if i == 0:
             #print(child)
             for option in child:
                 if option.tag == "Joints":
@@ -22,6 +23,8 @@ def extract_skeleton(path):
     return my_skeleton
 
 folder = 'dataset/Misc/KinectOutput40/Skeleton'
+folder = 'dataset/Fighting/KinectOutput22/Skeleton'
+
 from os import walk
 for (dirpath, dirnames, filenames) in walk(folder):
     for filename in filenames:
