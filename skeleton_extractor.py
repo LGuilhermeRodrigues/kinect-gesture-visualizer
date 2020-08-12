@@ -22,13 +22,14 @@ def extract_skeleton(path):
 
     return my_skeleton
 
-folder = 'dataset/Misc/KinectOutput40/Skeleton'
-folder = 'dataset/Fighting/KinectOutput22/Skeleton'
+def run_sample():
+    folder = 'dataset/Misc/KinectOutput40/Skeleton'
+    folder = 'dataset/Fighting/KinectOutput22/Skeleton'
 
-from os import walk
-for (dirpath, dirnames, filenames) in walk(folder):
-    for filename in filenames:
-        my_data.append(extract_skeleton(f'{folder}/{filename}'))
+    from os import walk
+    for (dirpath, dirnames, filenames) in walk(folder):
+        for filename in filenames:
+            my_data.append(extract_skeleton(f'{folder}/{filename}'))
 
-with open("skeletons.json", "w") as write_file:
-    json.dump(my_data, write_file)
+    with open("skeletons.json", "w") as write_file:
+        json.dump(my_data, write_file)
