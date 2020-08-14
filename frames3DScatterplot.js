@@ -147,7 +147,7 @@ function init(mydata){
         point3d(scatter),
         yScale3d([yLine])
     ];
-    processData(data, 30);
+    processData(data, 35);
 }
 
 function dragStart(){
@@ -187,7 +187,7 @@ d3.json("skeletons.json", skeletons=>{
         if (count<frames){
             setTimeout(()=>{
                 update()
-            },34)
+            },3000)
         }
     }
 
