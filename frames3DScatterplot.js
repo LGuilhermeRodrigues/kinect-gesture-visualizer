@@ -187,7 +187,7 @@ d3.json("skeletons.json", skeletons=>{
         if (count<frames){
             setTimeout(()=>{
                 update()
-            },3000)
+            },40)
         }
     }
 

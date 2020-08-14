@@ -34,6 +34,7 @@ def mov_to_scenario(mov_name):
         print('Unexpected value in mov_to_scenario')
         return ''
 
+
 def folder_to_actor(folder_number):
     if folder_number <=42:
         return 1
@@ -57,6 +58,24 @@ def folder_to_actor(folder_number):
         return 10
     print('Unexpected Folder: '+folder_number)
 
+
+def get_breaks(folder_id, last_frame):
+    break_actions = []
+    for item in action_list:
+        actor = item[1]
+        if item[0] == folder_id:
+            break_actions.append(item)
+    breaks = []
+    for index, act in enumerate(break_actions):
+        folder,actor,mov_name,frame=(act[0],act[1],act[2],act[3])
+        if index < (len(break_actions) - 1):
+            next_frame = break_actions[index+1][3]-1
+        else:
+            next_frame = last_frame
+        breaks.append((mov_name,frame,next_frame))
+    return actor, breaks
+
+
 action_list = []
 action_points_folder = 'dataset/ActionPoints'
 for (directory_path, directory_names, filenames) in walk(action_points_folder):
@@ -73,66 +92,37 @@ def sorting(obj):
 
 action_list.sort(key=sorting)
 
-action_total = len(action_list)
-count = 0
-current_folder = None
-randMovment = 0
-breaks = []
-for idx, act in enumerate(action_list):
-    if idx == action_total:
-        continue
-    folder,actor,mov_name,frame=(act[0],act[1],act[2],act[3])
-    if current_folder == folder:
-        breaks.append(act)
-    elif not current_folder:
-        current_folder = folder
-        frames = []
-        #frames_directory = f'dataset/{mov_to_scenario(mov_name)}/KinectOutput{current_folder}/Skeleton'
-        #for (dirpath, dirnames, filenames) in walk(frames_directory):
-        #        for filename in filenames:
-        #            frames.append(extractor.extract_skeleton(f'{frames_directory}/{filename}'))
-        breaks.append(act)
-    else:
-        #send breaks interval to folders
-        print('break:',breaks)
-        __act = breaks.pop(0)
-        __folder,__actor,__mov_name,__frame=(__act[0],__act[1],__act[2],__act[3])
-        while (len(breaks)>1):
-            _act = breaks.pop(0)
-            _folder,_actor,_mov_name,_frame=(_act[0],_act[1],_act[2],_act[3])
-            gesture_frames = list(range(__frame, _frame))
-            #lets test this gesture
-            frames = []
-            for frameId in gesture_frames:
-                frames_directory = f'dataset/{mov_to_scenario(_mov_name)}/KinectOutput{_folder}/Skeleton/Skeleton {frameId}.xml'
-                frames.append(extractor.extract_skeleton(frames_directory))
-            with open("skeletons.json", "w") as write_file:
-                json.dump(frames, write_file)
-                print('saved: ',_act)
-            break
-
-        #print(action_list)
-        #print(f'{folder} {actor} {mov_name} {frame}')
-        frames = []
-        frames_directory = f'dataset/{mov_to_scenario(mov_name)}/KinectOutput{current_folder}/Skeleton'
+folders = set()
+for action_point in action_list:
+    folders.add((action_point[0],mov_to_scenario(action_point[2])))
+folders = list(folders)
+last_frames = {}
+movement_id = 0
+for folder,scene in folders:
+        frames_directory = f'dataset/{scene}/KinectOutput{folder}/Skeleton'
+        frame_ids = []
+        frames = {}
         for (dirpath, dirnames, filenames) in walk(frames_directory):
-                for filename in filenames:
-                    frames.append(extractor.extract_skeleton(f'{frames_directory}/{filename}'))
+            for filename in filenames:
+                frame_id = int(filename[9:-4])
+                frame_ids.append(frame_id)
+                frames[frame_id] = extractor.extract_skeleton(f'{frames_directory}/{filename}')
+        last_frames[folder]=max(frame_ids)
+        actor, breaks = get_breaks(folder,last_frames[folder])
+        #print(folder,actor,breaks)
+        for movement_name, start, stop in breaks:
+            movement = []
+            for frame_id in range(start, stop-1):
+                if frame_id in frames:
+                    movement.append(frames[frame_id])
+            with open(f'json_frames/{actor}/{movement_name}/{movement_id}.json', "w") as write_file:
+                movement_id = movement_id + 1
+                json.dump(movement, write_file)
+                #print('saved a movement: ',folder,actor,start,stop,stop-start,len(movement),'frames')
 
-
-        frame_id = 0
-        #print(frames)
-        #print(f'{folder} {actor} {mov_name} {frame}')
-        #print(breaks)
-
-
-        if len(breaks):
-            initial = breaks.pop(0)
-        breaks = []
-        breaks.append(act)
-        current_folder = folder
-        if randMovment == 6:
-        # 30 deu ruim
-            break
-        else:
-            randMovment = randMovment + 1
+        testing = False
+        if testing:
+            with open("skeletons.json", "w") as write_file:
+                json.dump([frames[frame_id] for frame_id in range(min(frame_ids)+1,max(frame_ids))], write_file)
+                print('saved all movements on skeletons')
+                break
