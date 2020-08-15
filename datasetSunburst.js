@@ -37,13 +37,19 @@ d3.json("flare-2.json", data => {
 
     const root = partition(data);
     //console.log(root)
-    svg.append("g")
+    let arco = svg.append("g")
         .attr("fill-opacity", 0.6)
         .selectAll("path")
         .data(root.descendants().filter(d => d.depth))
         .enter().append('path')
         .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-        .attr("d", arc)
+        .on('click',(d)=>{
+            if(d.data.id){
+                d3.selectAll('.movementName').text(d.data.id)
+            }
+        })
+        .attr("class",d=>'Depth'+d.depth)
+    arco.attr("d", arc)
         .append("title")
         .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 

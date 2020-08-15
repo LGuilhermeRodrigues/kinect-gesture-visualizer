@@ -6,23 +6,28 @@
    "children": [
     {
      "name": "Right Punch",
-     "value": 1
+     "value": 1,
+     "id": "PunchRight"
     },
     {
      "name": "Left Punch",
-     "value": 1
+     "value": 1,
+     "id": "PunchLeft"
     },
     {
      "name": "Right Kick",
-     "value": 1
+     "value": 1,
+     "id": "KickRight"
     },
     {
      "name":  "Left Kick",
-     "value": 1
+     "value": 1,
+     "id": "PunchLeft"
     },
     {
      "name":  "Defend",
-     "value": 1
+     "value": 1,
+     "id": "Defend"
     }
    ]
   },
@@ -31,7 +36,8 @@
    "children": [
     {
      "name": "Golf swing",
-     "value": 1
+     "value": 1,
+     "id": "GolfSwing"
     }
    ]
   },
@@ -40,15 +46,18 @@
    "children": [
     {
      "name": "Swing forehand",
-     "value": 1
+     "value": 1,
+     "id": "TennisSwingForehand"
     },
     {
      "name": "Swing backhand",
-     "value": 1
+     "value": 1,
+     "id": "TennisSwingBackhand"
     },
     {
      "name": "Tennis serve",
-     "value": 1
+     "value": 1,
+     "id": "TennisServe"
     }
    ]
   },
@@ -57,7 +66,8 @@
    "children": [
     {
      "name": "Throw bowling ball",
-     "value": 1
+     "value": 1,
+     "id": "ThrowBowlingBall"
     }
    ]
   },
@@ -66,27 +76,33 @@
    "children": [
     {
      "name": "Aim & shoot",
-     "value": 1
+     "value": 1,
+     "id": "AimAndFireGun"
     },
     {
      "name": "Walk",
-     "value": 1
+     "value": 1,
+     "id": "Walk"
     },
     {
      "name": "Run",
-     "value": 1
+     "value": 1,
+     "id": "Run"
     },
     {
      "name": "Jump",
-     "value": 1
+     "value": 1,
+     "id": "Jump"
     },
     {
      "name": "Climb",
-     "value": 1
+     "value": 1,
+     "id": "Jump"
     },
     {
      "name": "Crouch",
-     "value": 1
+     "value": 1,
+     "id": "Crouch"
     }
    ]
   },
@@ -95,7 +111,18 @@
    "children": [
     {
      "name": "Steering wheel",
-     "value": 1
+     "value": 1,
+     "id": "SteerCentre"
+    },
+    {
+     "name": "Turn Right",
+     "value": 1,
+     "id": "SteerRight"
+    },
+    {
+     "name": "Turn Left",
+     "value": 1,
+     "id": "SteerLeft"
     }
    ]
   },
@@ -104,15 +131,18 @@
    "children": [
     {
      "name": "Wave",
-     "value": 1
+     "value": 1,
+     "id": "Wave"
     },
     {
      "name": "Flap arms",
-     "value": 1
+     "value": 1,
+     "id": "Flap"
     },
     {
      "name": "Clap",
-     "value": 1
+     "value": 1,
+     "id": "Clap"
     }
    ]
   }

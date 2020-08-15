@@ -183,7 +183,7 @@ d3.json("skeletons.json", skeletons=>{
         init(skeletons[count])
         count++
         d3.selectAll('.frameId').text(count)
-        console.log('plotando dados '+count)
+        //console.log('plotando dados '+count)
         if (count<frames){
             setTimeout(()=>{
                 update()
@@ -191,13 +191,60 @@ d3.json("skeletons.json", skeletons=>{
         }
     }
 
-    update()
-    // skeletons.forEach((skeleton, index)=>{
-    //     if(cnt===30){
-    //         // init(skeleton)
-    //         setTimeout(()=>{
-    //             console.log('plotando dados '+index)
-    //         },5000)
-    //     }
-    // })
-})
+        update()
+    })
+
+let runner = undefined
+
+let start = movement_name => {
+    let json_path = 'json_frames/1/'+movement_name+'/212.json'
+    if(runner){
+        clearTimeout(runner)
+    }
+    d3.json(json_path, skeletons=>{
+        let frames = skeletons.length
+        let count = 0;
+        d3.selectAll('.frameTotal').text(frames)
+        let update = () => {
+            init(skeletons[count])
+            count++
+            d3.selectAll('.frameId').text(count)
+            //console.log('plotando dados '+count)
+            if (count<frames){
+                runner = setTimeout(()=>{
+                    update()
+                },40)
+            }
+        }
+        update()
+    })
+}
+
+
+let get_movement = ()=>d3.selectAll('.movementName').text()
+
+let oldVal = '';
+let observer = setInterval(()=>{
+    let newVal = get_movement()
+    if(newVal!==oldVal){
+        console.log('changed '+oldVal+" to "+newVal)
+        oldVal = newVal
+        get_json_files(newVal)
+        //start('AimAndFireGun')
+    }
+},500)
+
+let get_json_files = (movement_name)=>{
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", 'json_frames/1/'+movement_name+'/', false ); // false for synchronous request
+    xmlHttp.send( null );
+    let htmlPage=xmlHttp.responseText
+    let file_names = []
+    while(htmlPage.indexOf('<li><a href="')>0){
+        //cutting html before
+        htmlPage = htmlPage.substring(htmlPage.indexOf('<li><a href="')+13)
+        let file_name = htmlPage.substring(0,htmlPage.indexOf(".json"))
+        file_names.push(parseInt(file_name))
+    }
+    return file_names
+}
