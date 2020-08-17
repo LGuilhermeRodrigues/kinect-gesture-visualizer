@@ -29,8 +29,6 @@ let autoBox = () => {
 
 d3.json("flare-2.json", data => {
 
-    //console.log(data)
-
     let color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1))
 
     let svg = d3.select('.datasetStructure').append("svg").style("border","0px solid black").attr("width",500).attr("height",500).attr("viewBox", "-250 -250 500 500")
@@ -45,7 +43,8 @@ d3.json("flare-2.json", data => {
         .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
         .on('click',(d)=>{
             if(d.data.id){
-                d3.selectAll('.movementName').text(d.data.id)
+                localStorage.setItem("movement_id", d.data.id);
+                d3.selectAll('.movementName').text(d.data.name)
             }
         })
         .attr("class",d=>'Depth'+d.depth)

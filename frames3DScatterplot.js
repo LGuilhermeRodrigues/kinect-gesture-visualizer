@@ -220,8 +220,7 @@ let start = movement_name => {
     })
 }
 
-
-let get_movement = ()=>d3.selectAll('.movementName').text()
+let get_movement = ()=>localStorage.getItem("movement_id") ? localStorage.getItem("movement_id") : 'AimAndFireGun';
 
 let oldVal = '';
 let observer = setInterval(()=>{
