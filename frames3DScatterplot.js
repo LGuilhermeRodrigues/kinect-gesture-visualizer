@@ -73,7 +73,7 @@ function processData(data, tt){
 
     /* ----------- y-Scale ----------- */
 
-    var yScale = svg.selectAll('path.yScale').data(data[2]);
+    /*var yScale = svg.selectAll('path.yScale').data(data[2]);
 
     yScale
         .enter()
@@ -84,10 +84,10 @@ function processData(data, tt){
         .attr('stroke-width', .5)
         .attr('d', yScale3d.draw);
 
-    yScale.exit().remove();
+    yScale.exit().remove();*/
 
     /* ----------- y-Scale Text ----------- */
-
+/*
     var yText = svg.selectAll('text.yText').data(data[2][0]);
 
     yText
@@ -103,7 +103,7 @@ function processData(data, tt){
         .attr('y', function(d){ return d.projected.y; })
         .text(function(d){ return d[1] <= 0 ? d[1] : ''; });
 
-    yText.exit().remove();
+    yText.exit().remove();*/
 
     d3.selectAll('._3d').sort(d3._3d().sort);
 
