@@ -1,8 +1,8 @@
-let svg = d3.select('.framesInspector').append("svg")
-    .style("border","1px solid black").attr("width",600).attr("height",500)
+let svg = d3.select('.framesInspector svg').attr("width",570).attr("height",460)
 
+d3.select('.framesInspector').attr("width",570)
 
-var origin = [300, 300], j = 10, scale = 20, scatter = [], yLine = [], xGrid = [], beta = 0, alpha = 0, key = function(d){ return d.id; }, startAngle = Math.PI/4;
+var origin = [300, 225], j = 10, scale = 20, scatter = [], yLine = [], xGrid = [], beta = 0, alpha = 0, key = function(d){ return d.id; }, startAngle = Math.PI/4;
 svg    = d3.select('svg').call(d3.drag().on('drag', dragged).on('start', dragStart).on('end', dragEnd)).append('g');
 var color  = d3.scaleOrdinal(d3.schemeCategory20);
 var mx, my, mouseX, mouseY;
