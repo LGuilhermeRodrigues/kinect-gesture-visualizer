@@ -1,12 +1,12 @@
 // from https://observablehq.com/@d3/sunburst
 
-let width = 500
+var width = 500
 
-let radius = width / 2
+var radius = width / 2
 
-let format = d3.format(",d")
+var format = d3.format(",d")
 
-let arc = d3.arc()
+var arc = d3.arc()
     .startAngle(d => d.x0)
     .endAngle(d => d.x1)
     .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
@@ -14,13 +14,13 @@ let arc = d3.arc()
     .innerRadius(d => d.y0)
     .outerRadius(d => d.y1 - 1)
 
-let partition = data => d3.partition()
+var partition = data => d3.partition()
     .size([2 * Math.PI, radius])
     (d3.hierarchy(data)
         .sum(d => d.value)
         .sort((a, b) => b.value - a.value))
 
-let autoBox = () => {
+var autoBox = () => {
     document.body.appendChild(this);
     const {x, y, width, height} = this.getBBox();
     document.body.removeChild(this);
@@ -29,13 +29,13 @@ let autoBox = () => {
 
 d3.json("flare-2.json", data => {
 
-    let color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1))
+    var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1))
 
-    let svg = d3.select('.datasetStructure').append("svg").style("border","0px solid black").attr("width",500).attr("height",500).attr("viewBox", "-250 -250 500 500")
+    var svg = d3.select('.datasetStructure').append("svg").style("border","0px solid black").attr("width",500).attr("height",500).attr("viewBox", "-250 -250 500 500")
 
     const root = partition(data);
     //console.log(root)
-    let arco = svg.append("g")
+    var arco = svg.append("g")
         .attr("fill-opacity", 0.6)
         .selectAll("path")
         .data(root.descendants().filter(d => d.depth))
