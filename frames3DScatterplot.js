@@ -71,43 +71,7 @@ function processData(data, tt){
 
     points.exit().remove();
 
-    /* ----------- y-Scale ----------- */
-
-    /*var yScale = svg.selectAll('path.yScale').data(data[2]);
-
-    yScale
-        .enter()
-        .append('path')
-        .attr('class', '_3d yScale')
-        .merge(yScale)
-        .attr('stroke', 'black')
-        .attr('stroke-width', .5)
-        .attr('d', yScale3d.draw);
-
-    yScale.exit().remove();*/
-
-    /* ----------- y-Scale Text ----------- */
-/*
-    var yText = svg.selectAll('text.yText').data(data[2][0]);
-
-    yText
-        .enter()
-        .append('text')
-        .attr('class', '_3d yText')
-        .attr('dx', '.3em')
-        .merge(yText)
-        .each(function(d){
-            d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-        })
-        .attr('x', function(d){ return d.projected.x; })
-        .attr('y', function(d){ return d.projected.y; })
-        .text(function(d){ return d[1] <= 0 ? d[1] : ''; });
-
-    yText.exit().remove();*/
-
     d3.selectAll('._3d').sort(d3._3d().sort);
-
-
 
 }
 
@@ -173,69 +137,11 @@ function dragEnd(){
     mouseY = d3.event.y - my + mouseY;
 }
 
-d3.selectAll('button').on('click', init);
-
-d3.json("skeletons.json", skeletons=>{
-    let frames = skeletons.length
-    let count = 0;
-    d3.selectAll('.frameTotal').text(frames)
-    let update = () => {
-        init(skeletons[count])
-        count++
-        d3.selectAll('.frameId').text(count)
-        //console.log('plotando dados '+count)
-        if (count<frames){
-            setTimeout(()=>{
-                update()
-            },40)
-        }
-    }
-
-        update()
-    })
-
-let runner = undefined
-
-let start = movement_name => {
-    let json_path = 'json_frames/1/'+movement_name+'/212.json'
-    if(runner){
-        clearTimeout(runner)
-    }
-    d3.json(json_path, skeletons=>{
-        let frames = skeletons.length
-        let count = 0;
-        d3.selectAll('.frameTotal').text(frames)
-        let update = () => {
-            init(skeletons[count])
-            count++
-            d3.selectAll('.frameId').text(count)
-            //console.log('plotando dados '+count)
-            if (count<frames){
-                runner = setTimeout(()=>{
-                    update()
-                },40)
-            }
-        }
-        update()
-    })
-}
-
 let get_movement = ()=>localStorage.getItem("movement_id") ? localStorage.getItem("movement_id") : 'AimAndFireGun';
-
-let oldVal = '';
-let observer = setInterval(()=>{
-    let newVal = get_movement()
-    if(newVal!==oldVal){
-        console.log('changed '+oldVal+" to "+newVal)
-        oldVal = newVal
-        get_json_files(newVal)
-        //start('AimAndFireGun')
-    }
-},500)
-
-let get_json_files = (movement_name)=>{
+let get_actor = ()=>parseInt(d3.select('.actorSelect').node().value);
+let get_json_files = (movement_name,actor_id)=>{
     let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", 'json_frames/1/'+movement_name+'/', false ); // false for synchronous request
+    xmlHttp.open( "GET", 'json_frames/'+actor_id+'/'+movement_name+'/', false ); // false for synchronous request
     xmlHttp.send( null );
     let htmlPage=xmlHttp.responseText
     let file_names = []
@@ -247,3 +153,78 @@ let get_json_files = (movement_name)=>{
     }
     return file_names
 }
+
+let movementValue = '';
+localStorage.setItem("movement_id", 'AimAndFireGun');
+let actorValue = 0;
+let gestureQueue = []
+let clearInspector = false
+let currentGesture = -1
+let currentFrame = -1
+let changeObserver = setInterval(()=>{
+    let oldMovVal = movementValue;
+    let oldActVal = actorValue;
+    let hasChange = false
+    let newMovVal = get_movement()
+    if(newMovVal!==oldMovVal){
+        oldMovVal = newMovVal
+        hasChange = true
+    }
+    let newActVal = get_actor()
+    if(newActVal!==oldActVal){
+        oldActVal = newActVal
+        hasChange = true
+    }
+    if(hasChange && oldMovVal !== '' && oldActVal !== 0){
+        actorValue = oldActVal
+        movementValue = oldMovVal
+        console.log('change detected',movementValue,actorValue)
+        let gestures_id = get_json_files(movementValue,actorValue)
+        console.log(gestures_id)
+        //compute change
+        //get_json_files(newVal)
+        //start('AimAndFireGun')
+        gestureQueue = gestures_id
+        clearInspector = true
+    }
+},500)
+
+let skeletons = undefined
+let jsonLoaded = false
+let frameRunner = setInterval(()=>{
+    if (clearInspector){
+        clearInspector = false
+        d3.select('.movementTotal').text(gestureQueue.length)
+        d3.select('.movementId').text(0)
+        currentGesture = 0
+        currentFrame = 0
+        jsonLoaded = false
+    }else{
+        if (currentGesture!==-1 && currentFrame!==-1){
+            if(jsonLoaded){
+                if (currentFrame < skeletons.length){
+                    d3.selectAll('.frameId').text(currentFrame+1)
+                    init(skeletons[currentFrame])
+                    currentFrame++
+                } else {
+                    jsonLoaded = false
+                    if (currentGesture < gestureQueue.length){
+                        currentGesture = currentGesture + 1
+                        currentFrame = 0
+                    }
+                }
+            }else{
+                if(currentGesture < gestureQueue.length){
+                    let json_path = 'json_frames/'+actorValue+'/'+movementValue+'/'+gestureQueue[currentGesture]+'.json'
+                    d3.select('.movementId').text(currentGesture+1)
+                    d3.json(json_path, skns=>{
+                        skeletons = skns; jsonLoaded = true;
+                        d3.selectAll('.frameTotal').text(skeletons.length)
+                        d3.selectAll('.frameId').text(0)
+                    })
+                }
+            }
+        }
+    }
+
+},40)

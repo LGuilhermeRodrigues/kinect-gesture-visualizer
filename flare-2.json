@@ -22,7 +22,7 @@
     {
      "name":  "Left Kick",
      "value": 1,
-     "id": "PunchLeft"
+     "id": "KickLeft"
     },
     {
      "name":  "Defend",
