@@ -1,21 +1,21 @@
 scenario,action,total,true positives %,true positives abs,false negatives abs,false positives abs,recall,precision,f1
-Fighting,Right Punch,15,0.96,14.4,0.6,0,0.96,1.00,0.979591837
-Fighting,Left Punch,15,1,15,0,0,1.00,1.00,1
-Fighting,Right Kick,15,1,15,0,0.9,1.00,0.94,0.970873786
-Fighting,Left Kick,15,1,15,0,0,1.00,1.00,1
-Fighting,Defend,15,1,15,0,0,1.00,1.00,1
-Golf,Golf swing,15,0.97,14.55,0.45,3.9,0.97,0.79,0.869955157
-Tennis,Swing forehand,15,0.76,11.4,3.6,1.05,0.76,0.92,0.830601093
-Tennis,Swing backhand,15,0.78,11.7,3.3,1.5,0.78,0.89,0.829787234
-Tennis,Tennis serve,15,0.8,12,3,2.1,0.80,0.85,0.824742268
-Bowling,Throw bowling ball,15,1,15,0,0,1.00,1.00,1
 First Person Shooter,Aim & shoot,45,1,45,0,0,1.00,1.00,1
 First Person Shooter,Walk,62,0.95,58.9,3.1,0,0.95,1.00,0.974358974
 First Person Shooter,Run,81,1,81,0,3.55,1.00,0.96,0.978556327
 First Person Shooter,Jump,18,1,18,0,1.05,1.00,0.94,0.971659919
 First Person Shooter,Climb,61,1,61,0,0,1.00,1.00,1
 First Person Shooter,Crouch,16,1,16,0,0,1.00,1.00,1
-Driving a car,Steering wheel (c+l+r),75,1,75,0,0,1.00,1.00,1
+Fighting,Right Punch,15,0.96,14.4,0.6,0,0.96,1.00,0.979591837
+Fighting,Left Punch,15,1,15,0,0,1.00,1.00,1
+Fighting,Right Kick,15,1,15,0,0.9,1.00,0.94,0.970873786
+Fighting,Left Kick,15,1,15,0,0,1.00,1.00,1
+Fighting,Defend,15,1,15,0,0,1.00,1.00,1
+Tennis,Swing forehand,15,0.76,11.4,3.6,1.05,0.76,0.92,0.830601093
+Tennis,Swing backhand,15,0.78,11.7,3.3,1.5,0.78,0.89,0.829787234
+Tennis,Tennis serve,15,0.8,12,3,2.1,0.80,0.85,0.824742268
+Driving a car,Steering wheel,75,1,75,0,0,1.00,1.00,1
 Miscellaneous,Wave,110,1,110,0,2.01,1.00,0.98,0.990946354
 Miscellaneous,Flap arms,43,1,43,0,0,1.00,1.00,1
 Miscellaneous,Clap,67,0.97,64.99,2.01,0,0.97,1.00,0.984771574
+Golf,Golf swing,15,0.97,14.55,0.45,3.9,0.97,0.79,0.869955157
+Bowling,Throw bowling ball,15,1,15,0,0,1.00,1.00,1
