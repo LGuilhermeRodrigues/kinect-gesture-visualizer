@@ -1,0 +1,33 @@
+group,variable,value
+Right Punch,Right Punch,0.96
+Left Punch,Left Punch,1
+Right Kick,Right Kick,1
+Right Kick,Tennis serve,0.06
+Left Kick,Left Kick,1
+Defend,Defend,1
+Golf swing,Golf swing,0.97
+Golf swing,Swing backhand,0.12
+Golf swing,Swing forehand,0.14
+Swing forehand,Swing forehand,0.76
+Swing forehand,Tennis serve,0.07
+Swing backhand,Swing backhand,0.78
+Swing backhand,Right Punch,0.04
+Swing backhand,Swing forehand,0.06
+Tennis serve,Tennis serve,0.8
+Tennis serve,Swing forehand,0.04
+Tennis serve,Swing backhand,0.1
+Throw bowling ball,Throw bowling ball,1
+Aim & shoot,Aim & shoot,1
+Walk,Walk,0.95
+Run,Run,1
+Run,Golf swing,0.03
+Run,Walk,0.05
+Jump,Jump,1
+Jump,Tennis serve,0.07
+Climb,Climb,1
+Crouch,Crouch,1
+Steering wheel,Steering wheel,1
+Wave,Wave,1
+Wave,Clap,0.03
+Flap arms,Flap arms,1
+Clap,Clap,0.97

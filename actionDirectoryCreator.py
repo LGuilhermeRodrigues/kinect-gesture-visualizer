@@ -38,21 +38,21 @@ def mov_to_scenario(mov_name):
 def folder_to_actor(folder_number):
     if folder_number <=42:
         return 1
-    if folder_number <=42:
-        return 2
     if folder_number <=63:
-        return 3
+        return 2
     if folder_number <=84:
-        return 4
+        return 3
     if folder_number <=105:
-        return 5
+        return 4
     if folder_number <=126:
-        return 6
+        return 5
     if folder_number <=147:
-        return 7
+        return 6
     if folder_number <=168:
-        return 8
+        return 7
     if folder_number <=189:
+        return 8
+    if folder_number <=210:
         return 9
     if folder_number <=234:
         return 10
@@ -75,17 +75,19 @@ def get_breaks(folder_id, last_frame):
         breaks.append((mov_name,frame,next_frame))
     return actor, breaks
 
-
 action_list = []
 action_points_folder = 'dataset/ActionPoints'
 for (directory_path, directory_names, filenames) in walk(action_points_folder):
     for filename in filenames:
         tree = ET.parse(f'{action_points_folder}/{filename}')
         root = tree.getroot()
-        for action_point in root:
-            action = action_point[0].text
-            frame_start = action_point[1].text
-            action_list.append((int(filename[12:][:-4]),folder_to_actor(int(filename[12:][:-4])), action, int(frame_start)))
+        if len(root) > 0:
+            for action_point in root:
+                action = action_point[0].text
+                frame_start = action_point[1].text
+                action_list.append((int(filename[12:][:-4]),folder_to_actor(int(filename[12:][:-4])), action, int(frame_start)))
+        else:
+            f'ActionPoints/{filename} is empty'
 
 def sorting(obj):
     return obj[0]
@@ -98,6 +100,7 @@ for action_point in action_list:
 folders = list(folders)
 last_frames = {}
 movement_id = 0
+folders_processed = 0
 for folder,scene in folders:
         frames_directory = f'dataset/{scene}/KinectOutput{folder}/Skeleton'
         frame_ids = []
@@ -110,6 +113,8 @@ for folder,scene in folders:
         last_frames[folder]=max(frame_ids)
         actor, breaks = get_breaks(folder,last_frames[folder])
         #print(folder,actor,breaks)
+        folders_processed=folders_processed+1
+        print(f'folders_saved: {folders_processed}')
         for movement_name, start, stop in breaks:
             movement = []
             for frame_id in range(start, stop-1):
