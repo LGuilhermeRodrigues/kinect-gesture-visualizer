@@ -214,9 +214,9 @@ let changeObserver = setInterval(()=>{
     if(hasChange && oldMovVal !== '' && oldActVal !== 0){
         actorValue = oldActVal
         movementValue = oldMovVal
-        console.log('change detected',movementValue,actorValue)
+        //console.log('change detected',movementValue,actorValue)
         let gestures_id = get_json_files(movementValue,actorValue)
-        console.log(gestures_id)
+        //console.log(gestures_id)
         //compute change
         //get_json_files(newVal)
         //start('AimAndFireGun')
