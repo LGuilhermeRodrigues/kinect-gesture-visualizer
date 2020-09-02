@@ -68,9 +68,13 @@ d3.csv("matrix.csv", function(data) {
         .style("border-radius", "5px")
         .style("padding", "5px")
 
+    var idGen = d=> d.group.replace(/\s/g, '').replace('&','') +
+        d.variable.replace(/\s/g, '').replace('&','')
+
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(d) {
         tooltip.style("visibility", 'unset')
+        d3.selectAll('.'+idGen(d)).attr('opacity','1')
     }
     var mousemove = function(d) {
         var x_position = parseFloat(d3.select(this).attr("x"))+90
@@ -83,6 +87,7 @@ d3.csv("matrix.csv", function(data) {
     }
     var mouseleave = function(d) {
         tooltip.style("visibility", 'hidden')
+        d3.selectAll('.'+idGen(d)).attr('opacity','0')
     }
 
     // add the squares
@@ -98,4 +103,27 @@ d3.csv("matrix.csv", function(data) {
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+
+    svg_container.append("g")
+        .selectAll('line')
+        .data(data)
+        .enter().append('line').attr('stroke','black').attr('stroke-width',"1px")
+        .attr('x1', 0)
+        .attr('y1', d=>y(d.variable)+y.bandwidth()/2)
+        .attr('x2', d=>x(d.group)+x.bandwidth()/2)
+        .attr('y2', d=>y(d.variable)+y.bandwidth()/2)
+        .attr('opacity','0')
+        .attr('class',d=>'dashed '+ idGen(d))
+
+    svg_container.append("g")
+        .selectAll('line')
+        .data(data)
+        .enter().append('line').attr('stroke','black').attr('stroke-width',"1px")
+        .attr('x1', d=>x(d.group)+x.bandwidth()/2)
+        .attr('y1', height)
+        .attr('x2', d=>x(d.group)+x.bandwidth()/2)
+        .attr('y2', d=>y(d.variable)+y.bandwidth()/2)
+        .attr('opacity','0')
+        .attr('class',d=>'dashed '+ idGen(d))
+
 })
