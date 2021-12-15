@@ -1,4 +1,8 @@
 import urllib.request
+
+# run this command on Powershell to delete old frames
+# Get-ChildItem -Path "D:\GitProjects\ClassificadorDeGestos\json_frames" -Include *.html -File -Recurse | foreach { $_.Delete()}
+
 for actor in range(1,11):
     for movement in ['TennisServe','Clap','KickRight','KickLeft',
                      'ThrowBowlingBall','Run','Jump','TennisSwingBackhand',

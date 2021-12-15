@@ -71,8 +71,44 @@ function processData(data, tt){
 
     points.exit().remove();
 
-    d3.selectAll('._3d').sort(d3._3d().sort);
+    /* ----------- TRAÇOS ----------- */
+    var pointsData = data[1]
+    var linesData = [[{... pointsData[0]},{... pointsData[1]}],
+        [{... pointsData[1]},{... pointsData[2]}],
+        [{... pointsData[2]},{... pointsData[3]}],
+        [{... pointsData[4]},{... pointsData[2]}],
+        [{... pointsData[4]},{... pointsData[5]}],
+        [{... pointsData[5]},{... pointsData[6]}],
+        [{... pointsData[6]},{... pointsData[7]}],
+        [{... pointsData[2]},{... pointsData[8]}],
+        [{... pointsData[8]},{... pointsData[9]}],
+        [{... pointsData[9]},{... pointsData[10]}],
+        [{... pointsData[10]},{... pointsData[11]}],
+        [{... pointsData[0]},{... pointsData[12]}],
+        [{... pointsData[12]},{... pointsData[13]}],
+        [{... pointsData[13]},{... pointsData[14]}],
+        [{... pointsData[14]},{... pointsData[15]}],
+        [{... pointsData[0]},{... pointsData[16]}],
+        [{... pointsData[16]},{... pointsData[17]}],
+        [{... pointsData[17]},{... pointsData[18]}],
+        [{... pointsData[18]},{... pointsData[19]}],
+    ]
 
+    var lines = svg.selectAll('line').data(linesData, key);
+    lines.enter()
+        .append('line')
+        .attr('stroke',d=>color(d[0].id))
+        .merge(lines)
+        .attr('opacity', 1)
+        .attr('x1', d=>d[0].projected.x)
+        .attr('y1', d=>d[0].projected.y)
+        .attr('x2', d=>d[1].projected.x)
+        .attr('y2', d=>d[1].projected.y)
+
+    lines.exit().remove()
+
+
+    d3.selectAll('._3d').sort(d3._3d().sort);
 }
 
 function posPointX(d){
@@ -178,9 +214,9 @@ let changeObserver = setInterval(()=>{
     if(hasChange && oldMovVal !== '' && oldActVal !== 0){
         actorValue = oldActVal
         movementValue = oldMovVal
-        console.log('change detected',movementValue,actorValue)
+        //console.log('change detected',movementValue,actorValue)
         let gestures_id = get_json_files(movementValue,actorValue)
-        console.log(gestures_id)
+        //console.log(gestures_id)
         //compute change
         //get_json_files(newVal)
         //start('AimAndFireGun')
